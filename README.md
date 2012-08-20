@@ -9,9 +9,16 @@ vim.rc
 git clone git://github.com/matt-gadd/vim-stuff.git ~/
 ```
 
-If errors throw, try running
+if errors throw, try running
 ```
 :BundleInstall
+```
+
+make command-t
+```
+cd ~/.vim/bundle/command-t/ruby/command-t
+ruby extconf.rb
+make
 ```
 
 thats all folks.
