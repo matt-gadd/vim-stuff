@@ -28,7 +28,6 @@ set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 let mapleader=","
-colorscheme jellybeans
 syntax on
 filetype plugin indent on
 set encoding=utf-8
@@ -164,6 +163,7 @@ Bundle 'vim-scripts/JSON.vim'
 Bundle 'vim-scripts/JavaScript-Indent'
 Bundle 'nanotech/jellybeans.vim'
 
+colorscheme jellybeans
 filetype plugin indent on     " required! 
 "
 " Brief help
