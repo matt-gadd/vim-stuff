@@ -162,6 +162,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/JSON.vim'
 Bundle 'vim-scripts/JavaScript-Indent'
+Bundle 'nanotech/jellybeans.vim'
 
 filetype plugin indent on     " required! 
 "
