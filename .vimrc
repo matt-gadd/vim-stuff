@@ -23,7 +23,10 @@ au! BufRead,BufNewFile *.json set filetype=json
 
 " turn matching parenthesis off
 let g:loaded_matchparen=1 
+let g:ctrlp_max_files = 0
 
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+let Powerline_symbols = 'fancy'
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show unicode glyphs
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
@@ -53,33 +56,14 @@ set list
 set tabstop=4
 set list listchars=tab:»·,trail:·
 set ttyfast
-set mouse=
+set mouse=a
 set nocompatible
 set noswapfile
 set fileformats=unix,dos,mac
 set laststatus=2
 set ruler
-
-let g:Powerline_symbols = 'fancy'
-" Command T mappings
-let g:CommandTMaxFiles=5000
-let g:CommandTMaxHeight=12
-map <C-o> :CommandT<CR>
-let g:CommandTAcceptSelectionMap = '<CR>'
-let g:CommandTCancelMap = '<C-g>'
-
-autocmd FileType javascript 
- \ setlocal shiftwidth=4 | 
- \ setlocal tabstop=4 | 
- \ setlocal softtabstop=4 | 
- \ setlocal expandtab
-
-
-autocmd FileType json 
- \ setlocal shiftwidth=4 | 
- \ setlocal tabstop=4 | 
- \ setlocal softtabstop=4 | 
- \ setlocal expandtab
+set sw=4
+set suffixesadd+=.js
 
 " Enable rainbow parenthesis
 au VimEnter * RainbowParenthesesToggle
@@ -114,15 +98,34 @@ function! SwapWindowBuffers()
     endif
 endfunction
 
-" Tab key mappings
-nmap <C-S-h> :tabprevious<cr>
-nmap <C-l> :tabnext<cr>
-map <C-S-h> :tabprevious<cr>
-map <C-l> :tabnext<cr>
-imap <C-S-h> <ESC>:tabprevious<cr>i
-imap <C-l> <ESC>:tabnext<cr>i
-nmap <C-t> :tabnew<cr>
-imap <C-t> <ESC>:tabnew<cr>
+" Define a command to make it easier to use
+command! -nargs=+ QFDo call QFDo(<q-args>)
+
+" Function that does the work
+function! QFDo(command)
+    " Create a dictionary so that we can
+    " get the list of buffers rather than the
+    " list of lines in buffers (easy way
+    " to get unique entries)
+    let buffer_numbers = {}
+    " For each entry, use the buffer number as 
+    " a dictionary key (won't get repeats)
+    for fixlist_entry in getqflist()
+        let buffer_numbers[fixlist_entry['bufnr']] = 1
+    endfor
+    " Make it into a list as it seems cleaner
+    let buffer_number_list = keys(buffer_numbers)
+
+    " For each buffer
+    for num in buffer_number_list
+        " Select the buffer
+        exe 'buffer' num
+        " Run the command that's passed as an argument
+        exe a:command
+        " Save if necessary
+        update
+    endfor
+endfunction
 
 nmap <silent> <c-n> :NERDTreeToggle<cr>
 nnoremap <leader>a :Ack 
@@ -131,8 +134,9 @@ nmap <leader>f :Ack <cword><CR>
 noremap <leader>vv :vsplit<CR>
 noremap <leader>ss :split<CR>
 noremap <leader>w :call SwapWindowBuffers()<CR>
-map <F2> :set paste<CR>
-map <F3> :set nopaste<CR>
+noremap <leader>r :MRU<CR>
+nmap <leader> :.w !pbcopy<CR><CR>
+vmap <leader> :w !pbcopy<CR><CR>
 " Shift text blocks/indent shortcuts
 vnoremap < <gv
 vnoremap > >gv
@@ -144,24 +148,26 @@ set winminheight=0      " Allow windows to get fully squashed
 map <leader>mm <C-W>_
 map <leader>nn <C-W>=
 
+let g:ctrlp_custom_ignore = '\v[\/](dojo|target|node)$'
+
 filetype indent on
 " required! 
 Bundle 'gmarik/vundle'
-
 Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'git://git.wincent.com/command-t.git'
-Bundle 'gmarik/vundle'
 Bundle 'The-NERD-Commenter'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'Command-T'
 Bundle 'scrooloose/nerdtree'
-Bundle 'ervandew/supertab'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/JSON.vim'
 Bundle 'vim-scripts/JavaScript-Indent'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'hallettj/jslint.vim'
+Bundle 'msanders/snipmate.vim'
+Bundle 'vim-scripts/mru.vim'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'kien/ctrlp.vim'
+Bundle 'ConradIrwin/vim-bracketed-paste'
 
 colorscheme jellybeans
 filetype plugin indent on     " required! 
@@ -174,4 +180,3 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
-
