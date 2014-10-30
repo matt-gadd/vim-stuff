@@ -135,8 +135,8 @@ noremap <leader>vv :vsplit<CR>
 noremap <leader>ss :split<CR>
 noremap <leader>w :call SwapWindowBuffers()<CR>
 noremap <leader>r :MRU<CR>
-nmap <leader> :.w !pbcopy<CR><CR>
-vmap <leader> :w !pbcopy<CR><CR>
+nmap <leader>cp :.w !pbcopy<CR><CR>
+vmap <leader>cp :w !pbcopy<CR><CR>
 " Shift text blocks/indent shortcuts
 vnoremap < <gv
 vnoremap > >gv
