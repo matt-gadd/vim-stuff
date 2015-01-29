@@ -9,6 +9,7 @@ au! BufRead,BufNewFile *.json set filetype=json
 
 let g:loaded_matchparen=1
 let g:ctrlp_max_files = 0
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 set guifont=Menlo\ Regular\ for\ Powerline\ 10
 let Powerline_symbols = 'fancy'
@@ -115,7 +116,7 @@ nnoremap <leader>a :Ack
 nnoremap ; :
 nmap <leader>f :Ack <cword><CR>
 noremap <leader>w :call SwapWindowBuffers()<CR>
-noremap <leader>r :MRU<CR>
+noremap <leader>r :CtrlPMRU<CR>
 nmap <leader> :.w !pbcopy<CR><CR>
 vmap <leader> :w !pbcopy<CR><CR>
 
@@ -138,7 +139,6 @@ Bundle 'vim-scripts/JavaScript-Indent'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'hallettj/jslint.vim'
 Bundle 'msanders/snipmate.vim'
-Bundle 'vim-scripts/mru.vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ConradIrwin/vim-bracketed-paste'
