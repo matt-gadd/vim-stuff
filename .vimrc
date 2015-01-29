@@ -135,8 +135,8 @@ noremap <leader>vv :vsplit<CR>
 noremap <leader>ss :split<CR>
 noremap <leader>w :call SwapWindowBuffers()<CR>
 noremap <leader>r :MRU<CR>
-nmap <leader>cp :.w !pbcopy<CR><CR>
-vmap <leader>cp :w !pbcopy<CR><CR>
+nmap <leader> :.w !pbcopy<CR><CR>
+vmap <leader> :w !pbcopy<CR><CR>
 " Shift text blocks/indent shortcuts
 vnoremap < <gv
 vnoremap > >gv
@@ -168,6 +168,10 @@ Bundle 'vim-scripts/mru.vim'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'kien/ctrlp.vim'
 Bundle 'ConradIrwin/vim-bracketed-paste'
+Bundle 'sotte/presenting.vim'
+Bundle 'vim-voom/VOoM'
+Bundle 'zef/vim-cycle'
+Bundle 'tpope/vim-surround'
 
 colorscheme jellybeans
 filetype plugin indent on     " required! 
@@ -180,3 +184,5 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
+
+let g:voom_tree_width = 50
