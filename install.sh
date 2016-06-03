@@ -7,4 +7,5 @@ brew install python3
 pip3 install --user neovim
 npm install -g typescript
 vim +PluginInstall +qall
+make -C ~/.vim/bundle/vimproc.vim
 ~/.vim/bundle/YouCompleteMe/install.sh
