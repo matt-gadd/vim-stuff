@@ -6,7 +6,6 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'nanotech/jellybeans.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'Shougo/vimproc.vim'
@@ -97,7 +96,6 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
-
 
 vnoremap < <gv
 vnoremap > >gv
