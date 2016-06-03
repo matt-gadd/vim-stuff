@@ -19,6 +19,7 @@ Plugin 'luochen1990/rainbow'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/ListToggle'
 Plugin 'AndrewRadev/switch.vim'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -96,6 +97,7 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
+
 
 vnoremap < <gv
 vnoremap > >gv
