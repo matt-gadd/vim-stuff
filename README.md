@@ -1,4 +1,4 @@
-if you're lazy, run:
+if you're lazy (and at least have brew installed), run:
 ```
 $ ./install.sh
 ```
