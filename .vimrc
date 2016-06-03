@@ -1,23 +1,34 @@
-set nocompatible               " be iMproved
-filetype off                   " required!
+set nocompatible
+filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-autocmd BufWritePre *.*  :%s/\s\+$//e
-au! BufRead,BufNewFile *.json set filetype=json
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'ConradIrwin/vim-bracketed-paste'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'itchyny/lightline.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'AlessandroYorba/Sierra'
+Plugin 'luochen1990/rainbow'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Valloric/ListToggle'
+Plugin 'AndrewRadev/switch.vim'
 
-let g:loaded_matchparen=1
-let g:ctrlp_max_files = 0
-let g:ctrlp_cmd = 'CtrlPMixed'
-
-set guifont=Menlo\ Regular\ for\ Powerline\ 10
-let Powerline_symbols = 'fancy'
-set laststatus=2
-set t_Co=256
-let mapleader=","
-syntax on
+call vundle#end()
 filetype plugin indent on
+
+colorscheme sierra
+let g:sierra_Twilight = 1
+
+set shell=bash
+set t_Co=256
+syntax on
 set encoding=utf-8
 set hidden
 set showcmd
@@ -48,105 +59,45 @@ set fileformats=unix,dos,mac
 set laststatus=2
 set ruler
 set sw=4
-set suffixesadd+=.js
 
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadBraces
+autocmd BufWritePre *.*  :%s/\s\+$//e
+autocmd FileType javascript syntax clear jsFuncBlock
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
-" Swap window buffers.
-function! SwapWindowBuffers()
-    if !exists("g:markedWinNum")
-        " set window marked for swap
-        let g:markedWinNum = winnr()
-        :echo "window marked for swap"
-    else
-        " mark destination
-        let curNum = winnr()
-        let curBuf = bufnr( "%" )
-        if g:markedWinNum == curNum
-            :echo "window unmarked for swap"
-        else
-            exe g:markedWinNum . "wincmd w"
-            " switch to source and shuffle dest->source
-            let markedBuf = bufnr( "%" )
-            " hide and open so that we aren't prompted and keep history
-            exe 'hide buf' curBuf
-            " switch to dest and shuffle source->dest
-            exe curNum . "wincmd w"
-            " hide and open so that we aren't prompted and keep history
-            exe 'hide buf' markedBuf
-            :echo "windows swapped"
-        endif
-        " unset window marked for swap
-        unlet g:markedWinNum
-    endif
-endfunction
+let mapleader=","
 
-" Define a command to make it easier to use
-command! -nargs=+ QFDo call QFDo(<q-args>)
+let g:rainbow_active = 1
 
-" Function that does the work
-function! QFDo(command)
-    " Create a dictionary so that we can
-    " get the list of buffers rather than the
-    " list of lines in buffers (easy way
-    " to get unique entries)
-    let buffer_numbers = {}
-    " For each entry, use the buffer number as
-    " a dictionary key (won't get repeats)
-    for fixlist_entry in getqflist()
-        let buffer_numbers[fixlist_entry['bufnr']] = 1
-    endfor
-    " Make it into a list as it seems cleaner
-    let buffer_number_list = keys(buffer_numbers)
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10'
 
-    " For each buffer
-    for num in buffer_number_list
-        " Select the buffer
-        exe 'buffer' num
-        " Run the command that's passed as an argument
-        exe a:command
-        " Save if necessary
-        update
-    endfor
-endfunction
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_loc_list_height = 5
+let g:syntastic_error_symbol = "⚠️"
+let g:syntastic_warning_symbol = "⚠️"
+highlight SyntasticErrorSign guifg=white guibg=red
 
-nmap <silent> <c-n> :NERDTreeToggle<cr>
-nnoremap <leader>a :Ack
-nnoremap ; :
-nmap <leader>f :Ack <cword><CR>
-noremap <leader>w :call SwapWindowBuffers()<CR>
-noremap <leader>r :CtrlPMRU<CR>
-nmap <leader> :.w !pbcopy<CR><CR>
-vmap <leader> :w !pbcopy<CR><CR>
+let g:tsuquyomi_disable_quickfix = 1
+
+let g:lt_height = 5
+
+let g:switch_mapping = "<C-a>"
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"🔒":""}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ }
 
 vnoremap < <gv
 vnoremap > >gv
-
-let g:ctrlp_custom_ignore = '\v[\/](dojo|target|node)$'
-
-filetype indent on
-" required!
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
-Bundle 'The-NERD-Commenter'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'vim-scripts/JSON.vim'
-Bundle 'vim-scripts/JavaScript-Indent'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'hallettj/jslint.vim'
-Bundle 'msanders/snipmate.vim'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'kien/ctrlp.vim'
-Bundle 'ConradIrwin/vim-bracketed-paste'
-Bundle 'sotte/presenting.vim'
-Bundle 'vim-voom/VOoM'
-Bundle 'zef/vim-cycle'
-Bundle 'tpope/vim-surround'
-
-colorscheme jellybeans
-filetype plugin indent on
-let g:voom_tree_width = 50
+nnoremap ; :
+inoremap <Leader>. <C-x><C-o>
+nnoremap <Leader>r :CtrlPMRU<CR>
