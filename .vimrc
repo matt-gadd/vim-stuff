@@ -54,6 +54,7 @@ set list listchars=tab:»·,trail:·
 set ttyfast
 set mouse=a
 set nocompatible
+set clipboard=unnamed
 set noswapfile
 set fileformats=unix,dos,mac
 set laststatus=2
