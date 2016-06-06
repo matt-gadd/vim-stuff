@@ -80,7 +80,6 @@ let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:syntastic_loc_list_height = 5
 let g:syntastic_error_symbol = "⚠️"
 let g:syntastic_warning_symbol = "⚠️"
-let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 highlight SyntasticErrorSign guifg=white guibg=red
 
 let g:tsuquyomi_disable_quickfix = 1
@@ -103,3 +102,4 @@ vnoremap > >gv
 nnoremap ; :
 inoremap <Leader>. <C-x><C-o>
 nnoremap <Leader>r :CtrlPMRU<CR>
+nnoremap <C-[> :TsuquyomiGoBack<CR>
