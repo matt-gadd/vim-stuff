@@ -80,7 +80,7 @@ let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 let g:syntastic_loc_list_height = 5
 let g:syntastic_error_symbol = "⛔️"
 let g:syntastic_warning_symbol = "⚠️"
-let g:syntastic_style_error_symbol = "⛔️"
+let g:syntastic_style_error_symbol = "⚠️"
 let g:syntastic_style_warning_symbol = "⚠️"
 let g:syntastic_aggregate_errors = 1
 highlight SyntasticErrorSign guifg=white guibg=red
