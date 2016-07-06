@@ -71,6 +71,7 @@ let g:rainbow_active = 1
 
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10'
+set wildignore+=*/node_modules/*,*/dist/*,*/typings/*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
