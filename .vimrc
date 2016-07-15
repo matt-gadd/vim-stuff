@@ -19,6 +19,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/ListToggle'
 Plugin 'AndrewRadev/switch.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
 filetype plugin indent on
@@ -71,6 +73,7 @@ let g:rainbow_active = 1
 
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:10'
+let g:ctrlp_show_hidden = 1
 set wildignore+=*/node_modules/*,*/dist/*,*/typings/*
 
 let g:syntastic_always_populate_loc_list = 1
@@ -106,4 +109,6 @@ vnoremap > >gv
 nnoremap ; :
 inoremap <Leader>. <C-x><C-o>
 nnoremap <Leader>r :CtrlPMRU<CR>
-nnoremap <C-[> :TsuquyomiGoBack<CR>
+nnoremap <Leader>a :TsuquyomiGoBack<CR>
+nnoremap <Leader>s :TsuquyomiDefinition<CR>
+command -nargs=1 Scratch :botright vnew ~/projects/scratch/<args>/scratch.<args>
